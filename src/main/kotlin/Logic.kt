@@ -1,4 +1,6 @@
 import java.io.File
+import kotlin.random.Random
+
 
 val sharedData = SharedData()
 val textMessage = Texts()
@@ -11,7 +13,8 @@ class Logic {
         val userInterface = UserInterface()
         userInterface.showTxt(textMessage.helloTxt)
         dbOperations.dbRead()
-        println(sharedData.credentialsArray)
+        val prog = ProgramInit()
+        println(prog.randomDataGenerator())
     }
 
 
@@ -19,7 +22,17 @@ class Logic {
 
 
 class ProgramInit() {
-
+    fun randomDataGenerator(length: Int = 12): String {
+        var iteration = 0
+        var randomString = ""
+        val charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        while (iteration < length) {
+            val randomNumber = Random.nextInt(0, 61)
+            randomString += charset[randomNumber]
+            iteration++
+        }
+        return randomString
+    }
 
 }
 
@@ -45,7 +58,8 @@ class DataBaseOperations {
     fun dbArrayBuilder(arrayElement: List<String>) {
         sharedData.credentialsArray.add(arrayElement)
     }
-    fun writeToDb(dataToWrite: String){
+
+    fun writeToDb(dataToWrite: String) {
         dbFile.appendText(dataToWrite + System.getProperty("line.separator"))
     }
 }

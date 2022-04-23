@@ -11,9 +11,7 @@ class Logic {
         val userInterface = UserInterface()
         userInterface.showTxt(textMessage.helloTxt)
         dbOperations.dbRead()
-        for (line in sharedData.credentialsArray) {
-            println(line[1])
-        }
+        println(sharedData.credentialsArray)
     }
 
 
@@ -46,6 +44,9 @@ class DataBaseOperations {
 
     fun dbArrayBuilder(arrayElement: List<String>) {
         sharedData.credentialsArray.add(arrayElement)
+    }
+    fun writeToDb(dataToWrite: String){
+        dbFile.appendText(dataToWrite + System.getProperty("line.separator"))
     }
 }
 

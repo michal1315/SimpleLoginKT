@@ -12,8 +12,10 @@ class Logic {
 
         val userInterface = UserInterface()
         userInterface.showTxt(textMessage.helloTxt)
-        val prog = ProgramInit()
-        prog.programStart()
+        dbOperations.dbRead()
+        for (line in sharedData.credentialsArray) {
+            println(line)
+        }
 
     }
 
@@ -27,11 +29,11 @@ class ProgramInit() {
         dbCorrectnessValidator()
     }
 
-    fun randomDataGenerator(length: Int = 12): String {
+    fun randomDataGenerator(lengthOfData: Int = 12): String {
         var iteration = 0
         var randomString = ""
         val charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        while (iteration < length) {
+        while (iteration < lengthOfData) {
             val randomNumber = Random.nextInt(0, 61)
             randomString += charset[randomNumber]
             iteration++
@@ -61,17 +63,12 @@ class DataBaseOperations {
     }
 
     fun dbRead() {
-        dbFile.forEachLine { line: String -> dbLineSplitter(line) }
+        dbFile.forEachLine { line ->
+            val arrayElement = line.split(", ")
+            sharedData.credentialsArray.add(arrayElement)
+        }
     }
 
-    fun dbLineSplitter(lineToSplit: String) {
-        val splittedLine = lineToSplit.split(", ")
-        dbArrayBuilder(splittedLine)
-    }
-
-    fun dbArrayBuilder(arrayElement: List<String>) {
-        sharedData.credentialsArray.add(arrayElement)
-    }
 
     fun writeToDb(dataToWrite: String) {
         dbFile.appendText(dataToWrite + System.getProperty("line.separator"))

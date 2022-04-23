@@ -12,9 +12,9 @@ class Logic {
 
         val userInterface = UserInterface()
         userInterface.showTxt(textMessage.helloTxt)
-        dbOperations.dbRead()
         val prog = ProgramInit()
-        println(prog.randomDataGenerator())
+        prog.programStart()
+
     }
 
 
@@ -22,6 +22,11 @@ class Logic {
 
 
 class ProgramInit() {
+    fun programStart() {
+        dbOperations.dbRead()
+        dbCorrectnessValidator()
+    }
+
     fun randomDataGenerator(length: Int = 12): String {
         var iteration = 0
         var randomString = ""
@@ -34,6 +39,15 @@ class ProgramInit() {
         return randomString
     }
 
+    fun dbCorrectnessValidator() {
+        var elementsAmount = 0
+        for (line in sharedData.credentialsArray) {
+            elementsAmount += line.size
+        }
+        if (elementsAmount % 3 != 0 || dbOperations.dbLenCount() == 0) {
+            println("db hujnia")
+        }
+    }
 }
 
 

@@ -11,15 +11,14 @@ class Logic {
         val userInterface = UserInterface()
         userInterface.showTxt(textMessage.helloTxt)
         dbOperations.dbRead()
-        for (line in sharedData.credentialsArray){
-            userInterface.showTxt(line)
+        for (line in sharedData.credentialsArray) {
+            println(line[1])
         }
-
-
-
     }
 
+
 }
+
 
 class ProgramInit() {
 
@@ -37,13 +36,16 @@ class DataBaseOperations {
     }
 
     fun dbRead() {
-        dbFile.forEachLine { line: String -> dbArrayBuilder(line) }
-        }
+        dbFile.forEachLine { line: String -> dbLineSplitter(line) }
+    }
 
+    fun dbLineSplitter(lineToSplit: String) {
+        val splittedLine = lineToSplit.split(", ")
+        dbArrayBuilder(splittedLine)
+    }
 
-
-    fun dbArrayBuilder(arrayElement: String) {
-        sharedData.credentialsArray.add(arrayListOf(arrayElement))
+    fun dbArrayBuilder(arrayElement: List<String>) {
+        sharedData.credentialsArray.add(arrayElement)
     }
 }
 

@@ -1,4 +1,4 @@
 class SharedData {
     val dbFile = "credentials.txt"
-    var credentialsArray: ArrayList<ArrayList<String>> = arrayListOf()
+    var credentialsArray: ArrayList<List<String>> = arrayListOf()
 }

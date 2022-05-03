@@ -1,5 +1,6 @@
 import java.io.File
 import kotlin.random.Random
+import kotlin.system.exitProcess
 
 
 val sharedData = SharedData()
@@ -9,6 +10,7 @@ val dbOperations = DataBaseOperations()
 class Logic {
 
     fun program() {
+        val base = BaseLogic()
 
         val userInterface = UserInterface()
         userInterface.showTxt(textMessage.helloTxt)
@@ -23,7 +25,7 @@ class Logic {
 }
 
 
-class ProgramInit() {
+class BaseLogic {
     fun programStart() {
         dbOperations.dbRead()
         dbCorrectnessValidator()
@@ -50,6 +52,9 @@ class ProgramInit() {
             println("db hujnia")
         }
     }
+    fun programExit(exitReason:Int = 0){
+        exitProcess(exitReason)
+    }
 }
 
 
@@ -69,9 +74,13 @@ class DataBaseOperations {
         }
     }
 
-
     fun writeToDb(dataToWrite: String) {
         dbFile.appendText(dataToWrite + System.getProperty("line.separator"))
+    }
+
+    fun createFile(nameCreatedFile:String){
+        val fileToCreate = File(nameCreatedFile)
+        fileToCreate.createNewFile()
     }
 }
 
@@ -100,3 +109,4 @@ class UserInterface {
 
     }
 }
+

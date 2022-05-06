@@ -1,18 +1,18 @@
 fun main(args: Array<String>) {
 
-    val baseLogic = BaseLogic()
+    val basicLogic = BasicLogic()
     val userInterface = UserInterface()
     val dbOperation = DataBaseOperations()
     var userChoice:Int
 
     fun welcome() {
         userInterface.welcomeSrc()
-        userChoice = baseLogic.dataInput().toInt()
+        userChoice = basicLogic.dataInput().toInt()
         if (userChoice == 1) {
-            baseLogic.showTxt("zaloguj")
+            basicLogic.showTxt("zaloguj")
         }
         if (userChoice == 2) {
-            baseLogic.programExit()
+            basicLogic.programExit()
 
         }
     }

@@ -1,7 +1,7 @@
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
-class BaseLogic {
+class BasicLogic {
     fun randomDataGenerator(lengthOfData: Int = 12): String {
         var iteration = 0
         var randomString = ""

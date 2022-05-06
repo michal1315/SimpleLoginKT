@@ -1,23 +1,10 @@
 class UserInterface {
-    fun showTxt(textToShow: Any, newLine: Boolean = true) {
-        if (newLine) {
-            println(textToShow)
-        } else {
-            print(textToShow)
-        }
-    }
-
-    fun dataInput(): String {
-        return readln()
-    }
-
-    fun clearConsole() {
-        if (System.getProperty("os.name") == "Windows") {
-            Runtime.getRuntime().exec("cls")
-        } else {
-            Runtime.getRuntime().exec("clear")
-
-        }
+    private val baseLogic = BaseLogic()
+    private val message = Texts()
+    fun welcomeSrc(){
+        baseLogic.showTxt(message.helloTxt + message.userHint)
+        baseLogic.showTxt("1: " + message.signInTxt)
+        baseLogic.showTxt("2: " + message.exitProgram)
 
     }
 }

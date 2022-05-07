@@ -2,6 +2,7 @@ import kotlin.random.Random
 import kotlin.system.exitProcess
 
 class BasicLogic {
+
     fun randomDataGenerator(lengthOfData: Int = 12): String {
         var iteration = 0
         var randomString = ""
@@ -38,6 +39,15 @@ class BasicLogic {
         }
 
     }
-
+    fun credentialParser(login:String, password:String): Boolean {
+        var checkPass = false
+        for(line in sharedData.credentialsArray){
+            val loginFormDb = line[0]
+            val passwordFromDb = line[2]
+            if (login == loginFormDb && password == passwordFromDb){
+                checkPass = true
+            }
+        }
+        return checkPass
+    }
 }
-

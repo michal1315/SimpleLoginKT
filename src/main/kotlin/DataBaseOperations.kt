@@ -1,7 +1,9 @@
 import java.io.File
 
+val sharedData = SharedData()
+
 class DataBaseOperations {
-    private val sharedData = SharedData()
+
     private val dbFile = File(sharedData.dbFile)
 
     private fun dbLenCount(): Int {
@@ -30,7 +32,7 @@ class DataBaseOperations {
         return "$login, $salt, $password"
     }
 
-    private fun dbCorruptionCheck(): Boolean {
+    fun dbCorruptionCheck(): Boolean {
         var dbCorrupted = false
         var elementsAmount = 0
         for (line in sharedData.credentialsArray) {

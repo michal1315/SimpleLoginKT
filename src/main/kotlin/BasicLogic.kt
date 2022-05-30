@@ -1,7 +1,12 @@
+import java.security.MessageDigest
+import javax.xml.bind.DatatypeConverter
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
 class BasicLogic {
+
+    var attemptNumber: Int = 0
+    private var lastAttemptReason: String = ""
 
     fun randomDataGenerator(lengthOfData: Int = 12): String {
         var iteration = 0
@@ -18,6 +23,7 @@ class BasicLogic {
     fun programExit(exitReason: Int = 0) {
         exitProcess(exitReason)
     }
+
     fun showTxt(textToShow: Any, newLine: Boolean = true) {
         if (newLine) {
             println(textToShow)
@@ -39,15 +45,48 @@ class BasicLogic {
         }
 
     }
-    fun credentialParser(login:String, password:String): Boolean {
+
+    fun credentialParser(login: String, password: String): Boolean {
         var checkPass = false
-        for(line in sharedData.credentialsArray){
+        for (line in sharedData.credentialsArray) {
             val loginFormDb = line[0]
+            val salt = line[1]
             val passwordFromDb = line[2]
-            if (login == loginFormDb && password == passwordFromDb){
+            if (login == loginFormDb && hashingData(password + salt) == passwordFromDb) {
                 checkPass = true
             }
         }
         return checkPass
+    }
+
+    fun heartbeat(timeout: Int = 3) {
+        var counter = 0
+        val dot = "."
+        while (counter < timeout) {
+            showTxt(dot, false)
+            dot + dot
+            counter += 1
+            Thread.sleep(1000)
+        }
+    }
+
+    private fun hashingData(dataToHash: String): String {
+        val bytes = MessageDigest
+            .getInstance("SHA-256")
+            .digest(dataToHash.toByteArray())
+        return DatatypeConverter.printHexBinary(bytes).lowercase()
+    }
+
+    fun attemptCounter(attemptReason: String) {
+        if (lastAttemptReason.isEmpty() || lastAttemptReason == attemptReason) {
+            attemptNumber += 1
+            if (attemptNumber > 3) {
+                programExit()
+            }
+        } else {
+            attemptNumber = 0
+            attemptNumber += 1
+        }
+        lastAttemptReason = attemptReason
     }
 }

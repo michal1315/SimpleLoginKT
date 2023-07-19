@@ -1,7 +1,11 @@
-class Texts {
-    var helloTxt = "Witamy w systemie logowania."
-    var userHint = "Proszę wybrać jedną z powyższych opcji aby kontynuować: "
+class Language {
+    var helloTxt = "Witamy w systemie logowania.\n" +
+            "1. Zaloguj się.\n" +
+            "2. Utwórz nowe konto\n" +
+            "3. Zamknij program\n" +
+            "Proszę wybrać jedną z powyższych opcji aby kontynuować: "
     var signInHint = "Proszę podać login i hasło."
+    var signInHintTry = "Proszę podać poprawny login i hasło."
     var loginTxt = "Wprowadż login: "
     var passwordTxt = "Wprowadż hasło: "
     var goodCredential = "Zalogowano."

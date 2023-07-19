@@ -1,14 +1,12 @@
-import java.security.MessageDigest
-import javax.xml.bind.DatatypeConverter
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
 class BasicLogic {
 
-    var attemptNumber: Int = 0
+    var attemptsNumber: Int = 0
     private var lastAttemptReason: String = ""
 
-    fun randomDataGenerator(lengthOfData: Int = 12): String {
+    fun genRandomData(lengthOfData: Int = 12): String {
         var iteration = 0
         var randomString = ""
         val charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -46,19 +44,6 @@ class BasicLogic {
 
     }
 
-    fun credentialParser(login: String, password: String): Boolean {
-        var checkPass = false
-        for (line in sharedData.credentialsArray) {
-            val loginFormDb = line[0]
-            val salt = line[1]
-            val passwordFromDb = line[2]
-            if (login == loginFormDb && hashingData(password + salt) == passwordFromDb) {
-                checkPass = true
-            }
-        }
-        return checkPass
-    }
-
     fun heartbeat(timeout: Int = 3) {
         var counter = 0
         val dot = "."
@@ -70,22 +55,12 @@ class BasicLogic {
         }
     }
 
-    private fun hashingData(dataToHash: String): String {
-        val bytes = MessageDigest
-            .getInstance("SHA-256")
-            .digest(dataToHash.toByteArray())
-        return DatatypeConverter.printHexBinary(bytes).lowercase()
-    }
-
     fun attemptCounter(attemptReason: String) {
         if (lastAttemptReason.isEmpty() || lastAttemptReason == attemptReason) {
-            attemptNumber += 1
-            if (attemptNumber > 3) {
-                programExit()
-            }
+            attemptsNumber += 1
         } else {
-            attemptNumber = 0
-            attemptNumber += 1
+            attemptsNumber = 0
+            attemptsNumber += 1
         }
         lastAttemptReason = attemptReason
     }

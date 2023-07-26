@@ -39,6 +39,8 @@ fun main(args: Array<String>) {
         basicLogic.showTxt(lang.passTxt, false)
         val newPass = basicLogic.dataInput()
         val salt = basicLogic.genRandomData(8)
+        //pass check
+        //credential.passwordValidation(newPass)
         dataBase.write(dataBase.recordFormatBuild(newLogin, salt, credential.hashData(newPass + salt)))
         basicLogic.programExit()
     }

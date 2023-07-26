@@ -1,5 +1,6 @@
 import java.io.File
 
+val basicLogic = BasicLogic()
 const val fileName = "credentials.txt"
 var credentialsArray: ArrayList<List<String>> = arrayListOf()
 val file = File(fileName)
@@ -12,7 +13,16 @@ class DataBase {
     }
 
     fun create() {
-        val create = File(fileName).createNewFile()
+        val db = File(fileName)
+        val login = basicLogic.genRandomData()
+        val salt = basicLogic.genRandomData(8)
+        val pass = basicLogic.genRandomData(64).lowercase()
+        if (file.exists()) {
+            file.delete()
+        } else {
+            db.createNewFile()
+        }
+        write(recordFormatBuild(login, salt, pass))
     }
 
     fun read() {
@@ -22,12 +32,8 @@ class DataBase {
         }
     }
 
-    fun writeData(dataToWrite: String) {
+    private fun write(dataToWrite: String) {
         file.appendText(dataToWrite + System.getProperty("line.separator"))
-    }
-
-    fun createFile(fileName: String) {
-        val create = File(fileName).createNewFile()
     }
 
     private fun lenCount(): Int {
@@ -36,7 +42,7 @@ class DataBase {
         return lineCount
     }
 
-    fun recordFormatBuild(login: String, salt: String, password: String): String {
+    private fun recordFormatBuild(login: String, salt: String, password: String): String {
         return "$login, $salt, $password"
     }
 

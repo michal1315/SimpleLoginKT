@@ -1,6 +1,6 @@
 class Language {
     var helloTxt = "Witamy w systemie logowania.\n" +
-            "1. Zaloguj się.\n" +
+            "1. Zaloguj się\n" +
             "2. Utwórz nowe konto\n" +
             "3. Zamknij program\n" +
             "Proszę wybrać jedną z powyższych opcji aby kontynuować: "

@@ -39,9 +39,7 @@ class BasicLogic {
             Runtime.getRuntime().exec("cls")
         } else {
             Runtime.getRuntime().exec("clear")
-
         }
-
     }
 
     fun heartbeat(timeout: Int = 3) {

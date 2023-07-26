@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 class CredentialHandler {
 
-    private fun hashData(dataToHash: String): String {
+    fun hashData(dataToHash: String): String {
         val bytes = MessageDigest
             .getInstance("SHA-256")
             .digest(dataToHash.toByteArray())

@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
             }
             basicLogic.showTxt(lang.loginTxt, false)
             val login = basicLogic.dataInput()
-            basicLogic.showTxt(lang.passwordTxt, false)
+            basicLogic.showTxt(lang.passTxt, false)
             val pass = basicLogic.dataInput()
             if (credential.credentialPassCheck(login, pass)) {
                 basicLogic.showTxt(lang.goodCredential + "\n" + lang.goodBay)
@@ -33,12 +33,19 @@ fun main(args: Array<String>) {
     }
 
     fun createAccount() {
-
+        basicLogic.showTxt(lang.createAccount)
+        basicLogic.showTxt(lang.loginTxt, false)
+        val newLogin = basicLogic.dataInput()
+        basicLogic.showTxt(lang.passTxt, false)
+        val newPass = basicLogic.dataInput()
+        val salt = basicLogic.genRandomData(8)
+        dataBase.write(dataBase.recordFormatBuild(newLogin, salt, credential.hashData(newPass + salt)))
+        basicLogic.programExit()
     }
 
     fun welcomeMenu() {
         while (true) {
-            basicLogic.showTxt(lang.helloTxt, false)
+            basicLogic.showTxt(lang.welcomeTxt, false)
             userChoice = basicLogic.dataInput()
             when (userChoice) {
                 "1" -> login()

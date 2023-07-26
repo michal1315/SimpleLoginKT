@@ -1,5 +1,5 @@
 class Language {
-    var helloTxt = "Witamy w systemie logowania.\n" +
+    var welcomeTxt = "Witamy w systemie logowania.\n" +
             "1. Zaloguj się\n" +
             "2. Utwórz nowe konto\n" +
             "3. Zamknij program\n" +
@@ -7,15 +7,13 @@ class Language {
     var signInHint = "Proszę podać login i hasło."
     var signInHintTry = "Proszę podać poprawny login i hasło."
     var loginTxt = "Wprowadż login: "
-    var passwordTxt = "Wprowadż hasło: "
+    var passTxt = "Wprowadż hasło: "
     var goodCredential = "Zalogowano."
     var badCredential = "Nie poprawny login lub hasło!"
     var createAccountAnswer = "Utworzyć nowe konto?(Y/N)"
-    var createAccountYes = "Witamy w systemie rejestracji."
+    var createAccount = "Witamy w systemie rejestracji."
     var goodBay = "Do zobaczenia nastepnym razem."
-    var createAccountLogin = "Proszę podać login:"
-    var createAccountPassword = "Proszę podać hasło:"
-    var createAccountFinish = "Konto zostało dodane, program zostanie za chwile ponownie uruchomiony."
+    var createAccountSuccess = "Konto zostało dodane, prosze ponownie uruchomić program."
     var dataFileError = "Uszkodzony plik z danymi!"
     var newDataFileQuestion = "Wygenerować nowy plik, wszystie wprowadzone wcześniej dane zostaną utracone?(Y/N)"
     var createAccountFailure = "Nie udało się utworzyć konta, jeden lub więcej warunków nie zostało spełnionych:"

@@ -32,7 +32,7 @@ class DataBase {
         }
     }
 
-    private fun write(dataToWrite: String) {
+    fun write(dataToWrite: String) {
         file.appendText(dataToWrite + System.getProperty("line.separator"))
     }
 
@@ -42,7 +42,7 @@ class DataBase {
         return lineCount
     }
 
-    private fun recordFormatBuild(login: String, salt: String, password: String): String {
+    fun recordFormatBuild(login: String, salt: String, password: String): String {
         return "$login, $salt, $password"
     }
 

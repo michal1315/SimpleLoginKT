@@ -14,10 +14,10 @@ class CredentialHandler {
     fun credentialPassCheck(login: String, password: String): Boolean {
         var passUser = false
         for (line in credentialsArray) {
-            val loginFormDb = line[0]
+            val loginFromDb = line[0]
             val salt = line[1]
             val passwordFromDb = line[2]
-            if (login == loginFormDb && hashData(password + salt) == passwordFromDb) {
+            if (login == loginFromDb && hashData(password + salt) == passwordFromDb) {
                 passUser = true
             }
         }
@@ -52,5 +52,16 @@ class CredentialHandler {
             }
         }
         return passLong && digit && smallChar && bigChar
+    }
+
+    fun loginFreeCheck(login: String): Boolean {
+        var loginFree = true
+        for (line in credentialsArray) {
+            val loginFromDb = line[0]
+            if (login == loginFromDb) {
+                loginFree = false
+            }
+        }
+        return loginFree
     }
 }

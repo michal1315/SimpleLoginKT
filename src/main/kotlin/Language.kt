@@ -17,7 +17,7 @@ class Language {
     var dataFileError = "Uszkodzony plik z danymi!"
     var newDataFileQuestion = "Wygenerować nowy plik, wszystie wprowadzone wcześniej dane zostaną utracone?(Y/N)"
     var createAccountFail = "Nie udało się utworzyć konta."
-    var loginOccupiedTxt = "login jest już zajęty!"
+    var loginOccupiedTxt = "Login jest już zajęty!"
     var lackBigLetterInPass = "hasło nie zawiera dużej litery!"
     var lackSmallLetterInPass = "hasło nie zawiera małej litery!"
     var lackDigitInPass = "hasło nie zawiera cyfry!"

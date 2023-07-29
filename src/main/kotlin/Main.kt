@@ -33,15 +33,29 @@ fun main(args: Array<String>) {
     }
 
     fun createAccount() {
+        var newLogin = ""
+        var newPass = ""
         basicLogic.showTxt(lang.createAccount)
-        basicLogic.showTxt(lang.loginTxt, false)
-        val newLogin = basicLogic.dataInput()
+        while (true) {
+            if (basicLogic.attemptsNumber != 0) {
+                basicLogic.showTxt(lang.loginOccupiedTxt)
+            }
+            basicLogic.showTxt(lang.loginTxt, false)
+            newLogin = basicLogic.dataInput()
+            if (credential.loginFreeCheck(newLogin)) {
+                break
+            } else basicLogic.attemptCounter("loginNotFree")
+            if (basicLogic.attemptsNumber == 3) {
+                basicLogic.showTxt(lang.createAccountFail + "\n" + lang.goodBay)
+                basicLogic.programExit()
+            }
+        }
         while (true) {
             if (basicLogic.attemptsNumber == 0) {
                 basicLogic.showTxt(lang.passHint)
             }
             basicLogic.showTxt(lang.passTxt, false)
-            val newPass = basicLogic.dataInput()
+            newPass = basicLogic.dataInput()
             val salt = basicLogic.genRandomData(8)
             if (credential.passwordValidator(newPass)) {
                 dataBase.write(dataBase.recordFormatBuild(newLogin, salt, credential.hashData(newPass + salt)))

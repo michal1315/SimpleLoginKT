@@ -35,20 +35,22 @@ class CredentialHandler {
         }
         return randomString
     }
-    fun passwordValidation(password: String){
+
+    fun passwordValidator(password: String): Boolean {
+        var passLong = false
         var digit = false
         var smallChar = false
         var bigChar = false
-        for(char in password){
-            when(char){
+        if (password.length >= 8) {
+            passLong = true
+        }
+        for (char in password) {
+            when (char) {
                 in "0123456789" -> digit = true
                 in "abcdefghijklmnopqrstuvwxyz" -> smallChar = true
                 in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" -> bigChar = true
             }
         }
-
-        //println(digit)
-        //println(smallChar)
-        //println(bigChar)
+        return passLong && digit && smallChar && bigChar
     }
 }

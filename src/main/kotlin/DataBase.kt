@@ -25,6 +25,7 @@ class DataBase {
         write(recordFormatBuild(login, salt, pass))
     }
 
+
     fun read() {
         file.forEachLine { line: String ->
             val arrayElement = line.split(", ")
@@ -52,7 +53,7 @@ class DataBase {
         for (line in credentialsArray) {
             elementsAmount += line.size
         }
-        if (elementsAmount % 3 != 0 || lenCount() == 0) {
+        if (elementsAmount % 3 != 0 || elementsAmount == 0) {
             dbCondition = false
         }
         return dbCondition

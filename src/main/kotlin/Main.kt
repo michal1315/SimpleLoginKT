@@ -90,17 +90,24 @@ fun main(args: Array<String>) {
     fun program() {
         //lang choice
         if (dataBase.connection()) {
+            dataBase.read()
             if (dataBase.conditionCheck()) {
                 //println("db good")
-                dataBase.read()
+                // https://kiasmos.bandcamp.com/track/lit
+                welcomeMenu()
             } else {
                 //println("db ungood!")
+                basicLogic.showTxt(lang.newDataFileQuestion, false)
+                val dbRebuildQuestion = basicLogic.dataInput()
+                if (dbRebuildQuestion.lowercase() == "y") {
+                    dataBase.create()
+                } else {
+                    basicLogic.programExit()
+                }
             }
         } else {
             dataBase.create()
         }
-        // https://kiasmos.bandcamp.com/track/lit
-        welcomeMenu()
     }
     program()
 }

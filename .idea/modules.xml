@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleLoginKT.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleLoginKT.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleLoginKT.main.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleLoginKT.main.iml" />
     </modules>
   </component>

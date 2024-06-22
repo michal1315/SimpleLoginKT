@@ -1,5 +1,5 @@
 import java.security.MessageDigest
-import javax.xml.bind.DatatypeConverter
+import java.util.Base64
 import kotlin.random.Random
 
 class CredentialHandler {
@@ -8,7 +8,7 @@ class CredentialHandler {
         val bytes = MessageDigest
             .getInstance("SHA-256")
             .digest(dataToHash.toByteArray())
-        return DatatypeConverter.printHexBinary(bytes).lowercase()
+        return Base64.getEncoder().encodeToString(bytes).lowercase()
     }
 
     fun credentialPassCheck(login: String, password: String): Boolean {
